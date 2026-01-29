@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Moments ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div id="glitter-container"></div>
+
+<!-- AUDIO (SATU AJA) -->
+<audio id="bgMusic" src="song.mp3" loop></audio>
+
+<section class="slide hero">
+  <img src="img1.jpg" class="hero-img">
+  <div class="hero-text">
+    <h1>for you</h1>
+    <p>i love you and everything you’re becoming</p>
+  </div>
+</section>
+
+<section class="slide collage">
+  <div class="collage-photos">
+    <div class="polaroid p1"><img src="img2.jpg"></div>
+    <div class="polaroid p2"><img src="img3.jpg"></div>
+    <div class="polaroid p3"><img src="img4.jpg"></div>
+  </div>
+  <p class="quote">“We exist in moments, nothing more.”</p>
+</section>
+
+<section class="slide moments">
+  <div class="row">
+    <img src="img5.jpg">
+    <img src="img6.jpg">
+  </div>
+  <h2>Damn, I like me better<br>when I’m with you</h2>
+</section>
+
+<section class="slide little">
+  <h2>The Little Things</h2>
+  <p>moments that mean everything</p>
+  <div class="little-gallery">
+    <img src="img7.jpg">
+    <img src="img8.jpg">
+    <img src="img9.jpg">
+  </div>
+</section>
+
+<section class="slide words">
+  <p style="font-family: 'Princess Sofia', cursive; font-size:1.4rem; line-height:1.6;">
+    Loving you isn’t loud.<br>
+    It’s in the small moments,<br>
+    the quiet laughs,<br>
+    and the way everything feels easier with you.
+  </p>
+</section>
+
+
+<section class="slide countdown">
+  <h2>Countdown to Your Day 🎂</h2>
+  <div class="time">
+    <div><span id="days">0</span><small>Days</small></div>
+    <div><span id="hours">0</span><small>Hours</small></div>
+    <div><span id="minutes">0</span><small>Minutes</small></div>
+    <div><span id="seconds">0</span><small>Seconds</small></div>
+  </div>
+</section>
+
+<section class="slide ending">
+  <img src="img10.jpg">
+  <h1>It’s always you.</h1>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
