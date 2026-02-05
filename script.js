@@ -1,5 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ========= TAP TO START ========= */
+  const startScreen = document.getElementById("startScreen");
+  const music = document.getElementById("bgMusic");
+
+  if (startScreen) {
+    startScreen.addEventListener("click", () => {
+      if (music) {
+        music.volume = 0.9;
+        music.play().catch(() => {});
+      }
+
+      startScreen.classList.add("hide");
+      setTimeout(() => {
+        startScreen.style.display = "none";
+      }, 600);
+    });
+  }
+
   /* ========= SLIDE FADE IN ========= */
   const slides = document.querySelectorAll(".slide");
 
@@ -11,124 +29,169 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // tampilkan slide pertama LANGSUNG
   revealSlides();
   window.addEventListener("scroll", revealSlides);
 
-  /* ========= MUSIC (CLICK / TAP ONCE) ========= */
-  const music = document.getElementById("bgMusic");
-  let musicStarted = false;
-
-  function startMusic() {
-    if (!music || musicStarted) return;
-    music.volume = 0.9;
-    music.play().catch(()=>{}); // biar ga error autoplay
-    musicStarted = true;
-
-    document.removeEventListener("click", startMusic);
-    document.removeEventListener("touchstart", startMusic);
-  }
-
-  document.addEventListener("click", startMusic);
-  document.addEventListener("touchstart", startMusic);
-
   /* ========= COUNTDOWN ========= */
-  const targetDate = new Date("2026-03-17T00:00:00").getTime();
+  const targetDate = new Date("2026-02-06T02:59:00").getTime();
 
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
   const minutesEl = document.getElementById("minutes");
   const secondsEl = document.getElementById("seconds");
 
+  let birthdayDone = false;
+
   if (daysEl && hoursEl && minutesEl && secondsEl) {
     const countdownInterval = setInterval(() => {
       const gap = targetDate - Date.now();
 
-      if (gap <= 0) {
+      if (gap <= 0 && !birthdayDone) {
+        birthdayDone = true;
         clearInterval(countdownInterval);
 
-        // replace countdown dengan teks Happy Birthday
-        const parent = daysEl.parentElement.parentElement; // container .time
+        const parent = daysEl.parentElement.parentElement;
         parent.innerHTML = `
-          <div style="
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100px;
+          <h2 style="
+            font-family:'Princess Sofia', cursive;
+            font-size:2.4rem;
+            text-align:center;
           ">
-            <h2 style="
-              color: inherit; 
-              font-family: 'Princess Sofia', cursive;
-              font-size:2.5rem;
-              text-align:center;
-            ">
-              Happy Birthday for You 🎉
-            </h2>
-          </div>
+            Happy Birthday Eveline 🎉
+          </h2>
         `;
+
+        /* === MUNCULIN WISH SECTION === */
+        setTimeout(() => {
+          const wishSection = document.getElementById("wishSection");
+          if (wishSection) {
+            wishSection.style.display = "flex";
+            wishSection.style.opacity = 0;
+            setTimeout(() => {
+              wishSection.style.opacity = 1;
+            }, 200);
+          }
+        }, 1200);
+
         return;
       }
 
-      // update countdown normal
-      daysEl.textContent = Math.floor(gap / 86400000);
-      hoursEl.textContent = Math.floor((gap / 3600000) % 24);
-      minutesEl.textContent = Math.floor((gap / 60000) % 60);
-      secondsEl.textContent = Math.floor((gap / 1000) % 60);
+      if (gap > 0) {
+        daysEl.textContent = Math.floor(gap / 86400000);
+        hoursEl.textContent = Math.floor((gap / 3600000) % 24);
+        minutesEl.textContent = Math.floor((gap / 60000) % 60);
+        secondsEl.textContent = Math.floor((gap / 1000) % 60);
+      }
     }, 1000);
   }
 
-  /* ========= EFFECT HOVER GAMBAR ========= */
-  const imgs = document.querySelectorAll('.slide img');
+  /* ========= IMAGE HOVER EFFECT ========= */
+  document.querySelectorAll(".slide img").forEach(img => {
+    img.classList.add("hover-img");
 
-  imgs.forEach(img => {
-    img.classList.add('hover-img'); // tambahin class CSS
-
-    img.addEventListener('mousemove', (e) => {
+    img.addEventListener("mousemove", (e) => {
       const rect = img.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * 10;
-      const rotateY = ((x - centerX) / centerX) * -10;
+      const rx = ((y - cy) / cy) * 8;
+      const ry = ((x - cx) / cx) * -8;
 
-      img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.04)`;
     });
 
-    img.addEventListener('mouseleave', () => {
-      img.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    img.addEventListener("mouseleave", () => {
+      img.style.transform = "rotateX(0) rotateY(0) scale(1)";
     });
   });
 
+  /* ========= IMAGE MODAL ========= */
+  const modal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+
+  if (modal && modalImg) {
+    document.querySelectorAll(".slide img").forEach(img => {
+      img.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+      });
+    });
+
+    modal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  /* ========= ENDING TYPEWRITER ========= */
+  const target = document.getElementById("endingText");
+  const text = "It’s always you.";
+  let i = 0;
+
+  function typeText() {
+    if (i < text.length) {
+      target.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeText, 120);
+    }
+  }
+
+  if (target) {
+    window.addEventListener("scroll", () => {
+      const rect = target.getBoundingClientRect();
+      if (rect.top < window.innerHeight && target.innerHTML === "") {
+        typeText();
+      }
+    });
+  }
+
+  /* ========= WISH SYSTEM ========= */
+/* ========= WISH SYSTEM ========= */
+const sendWishBtn = document.getElementById("sendWish");
+const wishInput = document.getElementById("wishInput");
+const wishReply = document.getElementById("wishReply");
+
+if (sendWishBtn && wishInput && wishReply) {
+  sendWishBtn.addEventListener("click", () => {
+    if (wishInput.value.trim() === "") return;
+
+    // ilangin textarea & tombol
+    wishInput.style.display = "none";
+    sendWishBtn.style.display = "none";
+
+    // ganti dengan kalimat romantis
+    wishReply.innerHTML = `
+      Harapan yang sangat indah ;) <br>
+      kamu akan mewujudkannya ✨
+    `;
+    wishReply.style.opacity = 1;
+  });
+}
+
 });
 
-const container = document.getElementById('glitter-container');
+/* ========= GLITTER ========= */
+const container = document.getElementById("glitter-container");
 
 function createGlitter() {
-  const glitter = document.createElement('div');
-  glitter.classList.add('glitter');
+  if (!container) return;
 
-  // posisi horizontal random
-  glitter.style.left = Math.random() * 100 + 'vw';
+  const glitter = document.createElement("div");
+  glitter.className = "glitter";
 
-  // delay dan durasi random
-  const duration = Math.random()*5 + 3; // 3s - 8s
-  glitter.style.animationDuration = duration + 's';
-  glitter.style.animationDelay = '0s';
+  glitter.style.left = Math.random() * 100 + "vw";
 
-  // ukuran random
-  const size = Math.random() * 3 + 2; // 2px - 5px
-  glitter.style.width = size + 'px';
-  glitter.style.height = size + 'px';
+  const duration = Math.random() * 5 + 3;
+  glitter.style.animationDuration = duration + "s";
+
+  const size = Math.random() * 3 + 2;
+  glitter.style.width = size + "px";
+  glitter.style.height = size + "px";
 
   container.appendChild(glitter);
 
-  // hapus glitter setelah animasi selesai biar ga numpuk
-  setTimeout(() => {
-    glitter.remove();
-  }, duration*1000);
+  setTimeout(() => glitter.remove(), duration * 1000);
 }
 
-// spawn glitter terus-menerus
-setInterval(createGlitter, 100); // setiap 0.1 detik muncul glitter baru
+setInterval(createGlitter, 120);

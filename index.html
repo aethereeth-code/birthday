@@ -8,6 +8,13 @@
 </head>
 
 <body>
+  <div id="startScreen">
+  <div class="start-box">
+    <h1>🎁</h1>
+    <p>Tap to start your birthday surprise</p>
+  </div>
+</div>
+
 <div id="glitter-container"></div>
 
 <!-- AUDIO (SATU AJA) -->
@@ -16,7 +23,7 @@
 <section class="slide hero">
   <img src="img1.jpg" class="hero-img">
   <div class="hero-text">
-    <h1>for you</h1>
+    <h1>EVELINE</h1>
     <p>i love you and everything you’re becoming</p>
   </div>
 </section>
@@ -35,12 +42,12 @@
     <img src="img5.jpg">
     <img src="img6.jpg">
   </div>
-  <h2>Damn, I like me better<br>when I’m with you</h2>
+  <h2>Everything just clicks when you're around<br>I finally like the person i'm becoming</h2>
 </section>
 
 <section class="slide little">
-  <h2>The Little Things</h2>
-  <p>moments that mean everything</p>
+  <h2>Just a collection of tiny moments</h2>
+  <p>that prove you're my favorite place</p>
   <div class="little-gallery">
     <img src="img7.jpg">
     <img src="img8.jpg">
@@ -68,11 +75,27 @@
   </div>
 </section>
 
-<section class="slide ending">
-  <img src="img10.jpg">
-  <h1>It’s always you.</h1>
+<section class="slide wish-section" id="wishSection">
+  <h2>Make a Wish ✨</h2>
+
+  <textarea id="wishInput" placeholder="Tulis harapan kamu di sini..."></textarea>
+
+  <button id="sendWish">Kirim Harapan</button>
+
+  <p class="wish-reply" id="wishReply"></p>
 </section>
 
+
+<section class="slide ending">
+  <img src="img10.jpg">
+  <h1 id="endingText"></h1>
+</section>
+<div class="modal" id="imgModal">
+  <img id="modalImg">
+</div>
+
 <script src="script.js"></script>
+
+
 </body>
 </html>
