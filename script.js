@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("touchstart", startMusic);
 
   /* ========= COUNTDOWN ========= */
-  const targetDate = new Date("2026-01-30T00:00:00").getTime();
+  const targetDate = new Date("2026-03-17T00:00:00").getTime();
 
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
