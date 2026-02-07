@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", revealSlides);
 
   /* ========= COUNTDOWN ========= */
-  const targetDate = new Date("2026-02-06T02:59:00").getTime();
+  const targetDate = new Date("2026-02-12T00:00:00").getTime();
 
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             font-size:2.4rem;
             text-align:center;
           ">
-            Happy Birthday Eveline 🎉
+            Happy Birthday Evelyne 🎉
           </h2>
         `;
 
